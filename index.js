@@ -24,11 +24,20 @@ function run() {
     const emailsListSize = 100000
     const emails = generateRandomEmailsWithFiftyPercentDuplication(emailsListSize)
 
-    const startTime = performance.now()
-    removeDuplicates(emails)
-    const endTime = performance.now()
+    let startTime = performance.now()
+    const usingSet = removeDuplicates.usingSet(emails)
+    let endTime = performance.now()
     
-    console.log(`Email list size: ${emailsListSize} Execution time: ${endTime-startTime} ms`)
+    console.log('- Set')
+    console.log(`Input size: ${emails.length} Output size: ${usingSet.length} Execution time: ${endTime-startTime} ms\n`)
+    
+    
+    startTime = performance.now()
+    const usingIncludes = removeDuplicates.usingIncludes(emails)
+    endTime = performance.now()
+    
+    console.log('- Includes')
+    console.log(`Input size: ${emails.length} Output size: ${usingIncludes.length} Execution time: ${endTime-startTime} ms`)
 }
 
 run()
